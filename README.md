@@ -29,12 +29,14 @@ Observações:
 Não esqueça de “tratar” os limites de zoom mínimo e máximo senão poderá ocorrer erros de execução, ou até a inversão horizontal/vertical do desenho na tela. Geralmente estes “problemas” ocorrem devido ao tipo de variável declarada para armazenar o “passo” do zoom atual.
 
 
-![Questão 02](https://giphy.com/embed/QyW8rJFeMQ6QA0YCQ6)
+![Questão 02](assets/questão&#32;02.gif)
 
 
 ## Questão 03 - Desenhando objetos gráficos iguais
 
 Crie uma outra aplicação para fazer o desenho da imagem abaixo. Os círculos tem raio com valor 100.
+
+![Questão 03](assets/questão&#32;03.png)
 
 ## Questão 04 - Primitivas Geométricas
 
@@ -46,9 +48,13 @@ No caso a interação deve ser:
 
 **Atenção:** só deve aparecer em todo o código UM ÚNICO “glBegin” e “glEnd” para informar as primitivas geométricas. As imagens abaixo são meramente ilustrativas de só algumas das “primitivas”, e não precisam aparecer na mesma sequência.
 
+![Questão 04](assets/questão&#32;04.gif)
+
 ## Questão 05 - Sr. Palito, dando seus primeiros passos
 
 Agora, crie uma nova aplicação com o objetivo de poder mover um Segmento de Reta (SR), aqui conhecido com Sr. "Palito", lateralmente usando as teclas Q (esquerda) e W (Direita). Ao iniciar a aplicação um dos pontos do Sr. Palito está na origem. O segundo ponto do Sr. Palito será definido com raio de valor 100 e ângulo 45º. Ainda é possível usar as teclas A (diminuir) e S (aumentar) para mudar  o tamanho (raio), e as teclas Z (diminuir) e X (aumentar) para girar (ângulo) do Sr. Palito. Olhe o exemplo no vídeo a baixo.
+
+![Questão 05](assets/questão&#32;05.gif)
 
 ## Questão 06 - Spline
 
@@ -64,6 +70,7 @@ No caso a interação deve ser:
 ATENÇÃO: não é permitido usar o comando spline do OpenGL, sendo só permitido usar UMA das formas de splines “demonstradas em aula”. Ao mover um dos pontos de controle, o poliedro e a spline deve se ajustar aos novos valores deste ponto.
 Veja o exemplo no vídeo a baixo.
 
+![Questão 06](assets/questão&#32;06.gif)
 
 ## Questão 07 - BBox dos círculos
 
@@ -74,4 +81,4 @@ Para controlar o movimento do centro do círculo menor deve ser usado:
 - seguido do cálculo da distância (euclidiana, sem raiz).
 Exemplo, vídeo a baixo.
 
-
+![Questão 07](assets/questão&#32;07.gif)
