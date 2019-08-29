@@ -1,5 +1,11 @@
 # Computação Gráfica - Trabalho 01 
 
+Alunos: 
+
+- [Bruno Vigentas](https://github.com/bvigentas)
+- [Francisco Lucas Sens](https://github.com/franciscosens)
+- [Luciane Tedesco](https://github.com/lucianetedesco)
+
 [Slides](assets/slides.pdf)
 
 ## Questão 01 - Explorar o uso da primitiva gráfica ponto no SRU
