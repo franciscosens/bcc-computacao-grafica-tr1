@@ -42,23 +42,17 @@ namespace questao01
             var matematica = new Matematica();
             double raio = 100;
 
-
-
-            GL.LineWidth(7);
             GL.PointSize(4);
             GL.Begin(PrimitiveType.Points);
             GL.Color3(Color.Yellow);
 
             double angulo = 0;
-            for(int i = 0; i < 100; i = i + 1){
+            for(int i = 0; i < 72; i = i + 1){
                 var pontos = matematica.GerarPtosCirculo(angulo, raio);
                 GL.Vertex2(pontos.X , pontos.Y); 
-                //GL.Vertex2(pontos.X , pontos.Y); 
                 angulo += 5;
             }
-
             GL.End();
-
         }
 
         private void GerarLinhas()
