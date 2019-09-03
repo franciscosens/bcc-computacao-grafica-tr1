@@ -1,14 +1,16 @@
 ﻿using System;
 using OpenTK;
+using OpenTK.Graphics.OpenGL;
+using System.Drawing;
 
 namespace questao01
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            GameWindow window = new GameWindow(600, 600);
-            window.Run(1.0/60.0);
+            GameWindow window = new Mundo(600, 600);
+            window.Run(1.0 / 60.0);
         }
     }
 }
