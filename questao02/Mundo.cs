@@ -11,7 +11,7 @@ namespace questao02
     public class Mundo : GameWindow
     {
         public Mundo(int width, int height) : base(width, height) { }
-
+        private double velocidade = 20;
         private double left = -300;
         private double right = 300;
         private double bottom = -300;
@@ -84,7 +84,6 @@ namespace questao02
                 Environment.Exit(0);
             }
 
-
             switch (e.Key)
             {
                 case Key.E:
@@ -108,9 +107,11 @@ namespace questao02
                     break;
                 case Key.Number1:
                 case Key.I:
+                    left += velocidade; right -= velocidade; bottom += velocidade; top -= velocidade;
                     break;
                 case Key.Number2:
                 case Key.O:
+                    left -= velocidade; right += velocidade; bottom -= velocidade; top += velocidade;
                     break;
             }
         }
