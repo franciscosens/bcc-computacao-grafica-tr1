@@ -10,15 +10,15 @@ Alunos:
 
 ## Questão 01 - Explorar o uso da primitiva gráfica ponto no SRU
 
-Implemente uma aplicação para desenhar um círculo no centro do Sistema de Referência do Universo (SRU), com raio de valor 100. Utilize 72 pontos simetricamente distribuídos sobre o perímetro do círculo e defina as dimensões da janela do espaço gráfico com valores entre -300 a 300, de forma que o resultado final seja o mais parecido com a figura a baixo.
+Implemente uma aplicação para desenhar um círculo no centro do Sistema de Referência do Universo (SRU), com raio de valor 100. Utilize 72 pontos simetricamente distribuídos sobre o perímetro do círculo e defina as dimensões da janela do espaço gráfico com valores entre -300 a 300, de forma que o resultado final seja o mais parecido com a figura a baixo. Neste caso crie uma nova classe com o nome Circulo em "Circulo.cs".
 
 ![Questão 01](assets/questão&#32;01.png)
 
 Observações:
-* desenhe somente os eixos positivos x e y, cada um com comprimento igual a 200;
-* experimente mudar a cor de fundo da tela para cinza e a cor de desenho dos pontos para amarelo;
-* utilize as funções sin(ang) e cos(ang) da Classe Matematica fornecida;
-* não é permitido usar o comando circle do OpenGL e nem outra implementação que não use as funções da classe Matematica.
+- desenhe somente os eixos positivos x e y, cada um com comprimento igual a 200;
+- experimente mudar a cor de fundo da tela para cinza e a cor de desenho dos pontos para amarelo;
+- utilize as funções sin(ang) e cos(ang) da Classe Matematica fornecida;
+- não é permitido usar o comando circle do OpenGL e nem outra implementação que não use as funções da classe Matematica.
 
 ## Questão 02 - Funções de Pan e Zoom
 
@@ -32,7 +32,7 @@ Observações:
 - tecla Zoom in (aproximar): I;
 - tecla Zoom out (afastar): O.
 
-Não esqueça de “tratar” os limites de zoom mínimo e máximo senão poderá ocorrer erros de execução, ou até a inversão horizontal/vertical do desenho na tela. Geralmente estes “problemas” ocorrem devido ao tipo de variável declarada para armazenar o “passo” do zoom atual.
+Não esqueça de “tratar” os limites de zoom mínimo e máximo senão poderá ocorrer erros de execução, ou até a inversão horizontal/vertical do desenho na tela. Geralmente estes “problemas” ocorrem devido ao tipo de variável declarada para armazenar o “passo” do zoom atual. Lembre de usar a classe Circulo criada no exercício anterior.
 
 
 ![Questão 02](assets/questão&#32;02.gif)
@@ -40,7 +40,7 @@ Não esqueça de “tratar” os limites de zoom mínimo e máximo senão poder�
 
 ## Questão 03 - Desenhando objetos gráficos iguais
 
-Crie uma outra aplicação para fazer o desenho da imagem abaixo. Os círculos tem raio com valor 100.
+Crie uma outra aplicação para fazer o desenho da imagem abaixo. Os círculos tem raio com valor 100. Aqui utilize a classe Circulo já criada e crie uma nova classe com o nome SegReta em  "SegReta.cs" para desenhar o triângulo. Utilize a operação soma para deslocar o centro das circunferências para as posições apresentadas na imagem abaixo. Esta soma não deve ser feita na classe Matematica, e sim ser informada no momento que for criado o novo objeto do tipo Circulo, passando um Ponto4D de deslocamento (ptoDeslocamento).
 
 ![Questão 03](assets/questão&#32;03.png)
 
@@ -58,7 +58,7 @@ No caso a interação deve ser:
 
 ## Questão 05 - Sr. Palito, dando seus primeiros passos
 
-Agora, crie uma nova aplicação com o objetivo de poder mover um Segmento de Reta (SR), aqui conhecido com Sr. "Palito", lateralmente usando as teclas Q (esquerda) e W (Direita). Ao iniciar a aplicação um dos pontos do Sr. Palito está na origem. O segundo ponto do Sr. Palito será definido com raio de valor 100 e ângulo 45º. Ainda é possível usar as teclas A (diminuir) e S (aumentar) para mudar  o tamanho (raio), e as teclas Z (diminuir) e X (aumentar) para girar (ângulo) do Sr. Palito. Olhe o exemplo no vídeo a baixo.
+Agora, crie uma nova aplicação com o objetivo de poder mover um Segmento de Reta (SR), aqui conhecido com Sr. "Palito", lateralmente usando as teclas Q (esquerda) e W (Direita). Ao iniciar a aplicação um dos pontos do Sr. Palito está na origem. O segundo ponto do Sr. Palito será definido com raio de valor 100 e ângulo 45º. Ainda é possível usar as teclas A (diminuir) e S (aumentar) para mudar  o tamanho (raio), e as teclas Z (diminuir) e X (aumentar) para girar (ângulo) do Sr. Palito. Olhe o exemplo no vídeo a baixo. Lembre de usar a classe SegReta já definida no exercício anterior para desenhar o Sr. Palito.
 
 ![Questão 05](assets/questão&#32;05.gif)
 
@@ -74,7 +74,7 @@ No caso a interação deve ser:
 - a spline deve ser desenha usando linhas de cor amarela;
 - o poliedro de controle deve ser desenhado usando uma linha de cor ciano.
 ATENÇÃO: não é permitido usar o comando spline do OpenGL, sendo só permitido usar UMA das formas de splines “demonstradas em aula”. Ao mover um dos pontos de controle, o poliedro e a spline deve se ajustar aos novos valores deste ponto.
-Veja o exemplo no vídeo a baixo.
+Veja o exemplo no vídeo a baixo. Use a classe SegReta para desenhar o poliedro de controle e crie uma nova classe para representar o objeto gráfico Spline em Spline.cs.
 
 ![Questão 06](assets/questão&#32;06.gif)
 
@@ -86,5 +86,6 @@ Para controlar o movimento do centro do círculo menor deve ser usado:
 - um teste inicial pela BBox interna do círculo maior;
 - seguido do cálculo da distância (euclidiana, sem raiz).
 Exemplo, vídeo a baixo.
+Aqui só use as classes Retangulo e Circulo para fazer as representações dos objetos abaixo.
 
 ![Questão 07](assets/questão&#32;07.gif)
