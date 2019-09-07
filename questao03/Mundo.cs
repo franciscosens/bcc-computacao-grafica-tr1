@@ -4,17 +4,52 @@ using OpenTK.Graphics.OpenGL;
 using System.Drawing;
 using OpenTK.Input;
 using CG_Biblioteca;
+using FormasBiblioteca;
+using System.Collections.Generic;
 
 namespace questao03
 {
 
     public class Mundo : GameWindow
     {
+        public static Mundo instance = null;
+
         public Mundo(int width, int height) : base(width, height) { }
+
+        public static Mundo getInstance()
+        {
+            if (instance == null)
+                instance = new Mundo(600, 600);
+            return instance;
+        }
+
+        private Camera camera = new Camera();
+        protected List<Objeto> objetosLista = new List<Objeto>();
+        private bool moverPto = false;
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+            // GerarLinhas();
+            double raio = 100;
+
+            var segmentoRetaA = new SegReta("A", new Ponto4D(0, 0, 0), new Ponto4D(200, 0, 0), Color.Red, 5);
+            var segmentoRetaB = new SegReta("B", new Ponto4D(0, 0, 0), new Ponto4D(0, 200, 0), Color.Green, 5);
+            var segmentoRetaC = new SegReta("C", new Ponto4D(-100, -100, 0), new Ponto4D(0, 100, 0), Color.Aqua, 5);
+            var segmentoRetaD = new SegReta("D", new Ponto4D(0, 100, 0), new Ponto4D(100, -100, 0), Color.Aqua, 5);
+            var segmentoRetaE = new SegReta("E", new Ponto4D(-100, -100, 0), new Ponto4D(100, -100, 0), Color.Aqua, 5);
+            var circuloA = new Circulo("A", raio, Color.Black, 0, 100, 5);
+            var circuloB = new Circulo("B", raio, Color.Black, 100, -100, 5);
+            var circuloC = new Circulo("C", raio, Color.Black, -100, -100, 5);
+
+            objetosLista.Add(segmentoRetaA);
+            objetosLista.Add(segmentoRetaB);
+            objetosLista.Add(segmentoRetaC);
+            objetosLista.Add(segmentoRetaD);
+            objetosLista.Add(segmentoRetaE);
+            objetosLista.Add(circuloA);
+            objetosLista.Add(circuloB);
+            objetosLista.Add(circuloC);
             GL.ClearColor(Color.Gray);
         }
 
@@ -23,7 +58,9 @@ namespace questao03
             base.OnUpdateFrame(e);
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();
+            //GL.Ortho(camera.xmin, camera.xmax, camera.ymin, camera.ymax, camera.zmin, camera.zmax);
             GL.Ortho(-300, 300, -300, 300, -1, 1);
+
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -32,65 +69,40 @@ namespace questao03
             GL.Clear(ClearBufferMask.ColorBufferBit);
             GL.MatrixMode(MatrixMode.Modelview);
             GL.LoadIdentity();
-            GerarLinhas();
-            GerarCirculo(0, 100);
-            GerarCirculo(100, -100);
-            GerarCirculo(-100, -100);
-            GerarTriangulo();
+
+            for (var i = 0; i < objetosLista.Count; i++)
+            {
+                objetosLista[i].Desenhar();
+            }
+
             this.SwapBuffers();
         }
 
-        private void GerarTriangulo()
+        protected override void OnKeyDown(OpenTK.Input.KeyboardKeyEventArgs e)
         {
-            GL.LineWidth(5);
-            GL.Begin(PrimitiveType.Lines);
-            GL.Color3(Color.Aqua);
-            GL.Vertex2(-100, -100); GL.Vertex2(0, 100);
-            GL.Vertex2(0, 100); GL.Vertex2(100, -100);
-            GL.Vertex2(-100, -100); GL.Vertex2(100, -100);
-            GL.End();
-        }
-
-        private void GerarCirculo(int adicionalX = 0, int adicionarlY = 0)
-        {
-            var matematica = new Matematica();
-            double raio = 100;
-
-            GL.PointSize(5);
-            GL.Begin(PrimitiveType.Points);
-            GL.Color3(Color.Black);
-
-            double angulo = 0;
-            for(int i = 0; i < 72; i = i + 1){
-                var pontos = matematica.GerarPtosCirculo(angulo, raio);
-                GL.Vertex2(pontos.X + adicionalX, pontos.Y + adicionarlY); 
-                angulo += 5;
-            }
-            GL.End();
-        }
-
-        private void GerarLinhas()
-        {
-            GL.LineWidth(5);
-            GL.Begin(PrimitiveType.Lines);
-            GL.Color3(Color.Red);
-            GL.Vertex2(0, 0); GL.Vertex2(200, 0);
-            GL.Color3(Color.Green);
-            GL.Vertex2(0, 0); GL.Vertex2(0, 200);
-            GL.End();
-        }
-
-
-        protected override void OnKeyDown(KeyboardKeyEventArgs e)
-        {
-            base.OnKeyDown(e);
-            if (e.Alt && e.Key == Key.F4)
+            if (e.Key == Key.Escape)
+                Exit();
+            else
+            if (e.Key == Key.E)
             {
-                Environment.Exit(0);
+                for (var i = 0; i < objetosLista.Count; i++)
+                {
+                    objetosLista[i].PontosExibirObjeto();
+                }
+            }
+            else
+            if (e.Key == Key.M)
+            {
+                moverPto = !moverPto;
             }
         }
 
-
-
+        protected override void OnMouseMove(MouseMoveEventArgs e)
+        {
+            if (moverPto)
+            {
+                //retanguloB.MoverPtoSupDir(new Ponto4D(e.Position.X, 600 - e.Position.Y, 0));
+            }
+        }
     }
 }

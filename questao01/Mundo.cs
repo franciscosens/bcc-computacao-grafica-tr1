@@ -4,17 +4,42 @@ using OpenTK.Graphics.OpenGL;
 using System.Drawing;
 using OpenTK.Input;
 using CG_Biblioteca;
+using FormasBiblioteca;
+using System.Collections.Generic;
 
 namespace questao01
 {
 
     public class Mundo : GameWindow
     {
+        public static Mundo instance = null;
+
         public Mundo(int width, int height) : base(width, height) { }
+
+        public static Mundo getInstance()
+        {
+            if (instance == null)
+                instance = new Mundo(600, 600);
+            return instance;
+        }
+
+        private Camera camera = new Camera();
+        protected List<Objeto> objetosLista = new List<Objeto>();
+        private bool moverPto = false;
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+            // GerarLinhas();
+            double raio = 100;
+
+            var segmentoRetaA = new SegReta("A", new Ponto4D(0, 0, 0), new Ponto4D(200, 0, 0), Color.Red, 5);
+            var segmentoRetaB = new SegReta("B", new Ponto4D(0, 0, 0), new Ponto4D(0, 200, 0), Color.Green, 5);
+            var circuloA = new Circulo("A", raio, Color.Yellow, 0, 0, 5);
+
+            objetosLista.Add(segmentoRetaA);
+            objetosLista.Add(segmentoRetaB);
+            objetosLista.Add(circuloA);
             GL.ClearColor(Color.Gray);
         }
 
@@ -23,7 +48,9 @@ namespace questao01
             base.OnUpdateFrame(e);
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();
+            //GL.Ortho(camera.xmin, camera.xmax, camera.ymin, camera.ymax, camera.zmin, camera.zmax);
             GL.Ortho(-300, 300, -300, 300, -1, 1);
+
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -32,27 +59,13 @@ namespace questao01
             GL.Clear(ClearBufferMask.ColorBufferBit);
             GL.MatrixMode(MatrixMode.Modelview);
             GL.LoadIdentity();
-            GerarLinhas();
-            GerarCirculo();
-            this.SwapBuffers();
-        }
 
-        private void GerarCirculo()
-        {
-            var matematica = new Matematica();
-            double raio = 100;
-
-            GL.PointSize(4);
-            GL.Begin(PrimitiveType.Points);
-            GL.Color3(Color.Yellow);
-
-            double angulo = 0;
-            for(int i = 0; i < 72; i = i + 1){
-                var pontos = matematica.GerarPtosCirculo(angulo, raio);
-                GL.Vertex2(pontos.X , pontos.Y); 
-                angulo += 5;
+            for (var i = 0; i < objetosLista.Count; i++)
+            {
+                objetosLista[i].Desenhar();
             }
-            GL.End();
+
+            this.SwapBuffers();
         }
 
         private void GerarLinhas()
@@ -67,16 +80,31 @@ namespace questao01
         }
 
 
-        protected override void OnKeyDown(KeyboardKeyEventArgs e)
+        protected override void OnKeyDown(OpenTK.Input.KeyboardKeyEventArgs e)
         {
-            base.OnKeyDown(e);
-            if (e.Alt && e.Key == Key.F4)
+            if (e.Key == Key.Escape)
+                Exit();
+            else
+            if (e.Key == Key.E)
             {
-                Environment.Exit(0);
+                for (var i = 0; i < objetosLista.Count; i++)
+                {
+                    objetosLista[i].PontosExibirObjeto();
+                }
+            }
+            else
+            if (e.Key == Key.M)
+            {
+                moverPto = !moverPto;
             }
         }
 
-
-
+        protected override void OnMouseMove(MouseMoveEventArgs e)
+        {
+            if (moverPto)
+            {
+                //retanguloB.MoverPtoSupDir(new Ponto4D(e.Position.X, 600 - e.Position.Y, 0));
+            }
+        }
     }
 }

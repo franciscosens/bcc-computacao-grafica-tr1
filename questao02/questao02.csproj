@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CG_Biblioteca\CG_Biblioteca.csproj" />
+    <ProjectReference Include="..\FormasBiblioteca\FormasBiblioteca.csproj"/>
   </ItemGroup>
   
 </Project>
