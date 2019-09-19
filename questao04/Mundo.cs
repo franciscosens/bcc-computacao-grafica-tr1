@@ -8,7 +8,7 @@ using OpenTK.Input;
 using CG_Biblioteca;
 using Color = OpenTK.Color;
 
-namespace FormasBiblioteca
+namespace questao04
 {
   class Mundo : GameWindow
   {
@@ -33,10 +33,10 @@ namespace FormasBiblioteca
     {
       base.OnLoad(e);
 
-      retanguloA = new Retangulo("A", new Ponto4D(50, 50, 0), new Ponto4D(150, 150, 0));
-      retanguloB = new Retangulo("B", new Ponto4D(50, 150, 0), new Ponto4D(150, 250, 0));
-      objetosLista.Add(retanguloA);
-      objetosLista.Add(retanguloB);
+      var pontoA = new Ponto4D(1,1,0);
+      var pontoB = new Ponto4D(1,1,0);
+      var pontoC = new Ponto4D(1,1,0);
+      var pontoD = new Ponto4D(1,1,0);
 
       GL.ClearColor(Color.Gray);
     }
@@ -106,16 +106,6 @@ namespace FormasBiblioteca
       GL.End();
     }
 
-  }
-
-  class Program
-  {
-    static void Main(string[] args)
-    {
-      Mundo window = new Mundo(600, 600);
-      window.Title = "CG_Template";
-      window.Run(1.0 / 60.0);
-    }
   }
 
 }

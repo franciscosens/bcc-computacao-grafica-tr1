@@ -1,6 +1,7 @@
 using System.Drawing;
 using CG_Biblioteca;
 using OpenTK.Graphics.OpenGL;
+using Color = OpenTK.Color;
 
 namespace FormasBiblioteca
 {

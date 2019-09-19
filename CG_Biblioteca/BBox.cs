@@ -5,6 +5,7 @@
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System.Drawing;
+using Color = OpenTK.Color;
 
 namespace CG_Biblioteca {
   public class BBox {
