@@ -44,9 +44,9 @@ namespace questao04
       var segmentoRetaB = new SegReta("B", new Ponto4D(0, 0, 0), new Ponto4D(0, 200, 0), Color.Green, 5);
 
       var pontos = new List<Ponto4D>();
-      pontos.Add(new Ponto4D(-200,-200,0));
-      pontos.Add(new Ponto4D(-200,200,0));
       pontos.Add(new Ponto4D(200,200,0));
+      pontos.Add(new Ponto4D(-200,200,0));
+      pontos.Add(new Ponto4D(-200,-200,0));
       pontos.Add(new Ponto4D(200,-200,0));
       
 
