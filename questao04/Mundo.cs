@@ -34,6 +34,7 @@ namespace questao04
             PrimitiveType.Quads, PrimitiveType.QuadStrip, PrimitiveType.Polygon};
 
     private int primitivaAtual = 0;
+    private PontosExtremos pontosExtremos;
 
     protected override void OnLoad(EventArgs e)
     {
@@ -49,10 +50,11 @@ namespace questao04
       pontos.Add(new Ponto4D(200,-200,0));
       
 
-      // var pontosExtremos = new PontosExtremos( pontos);
+      pontosExtremos = new PontosExtremos("Pontos",PrimitiveType.Points, pontos);
 
       objetosLista.Add(segmentoRetaA);
       objetosLista.Add(segmentoRetaB);
+      objetosLista.Add(pontosExtremos);
       GL.ClearColor(Color.Gray);
     }
     protected override void OnUpdateFrame(FrameEventArgs e)
@@ -89,7 +91,7 @@ namespace questao04
           primitivaAtual++;
         }
 
-        TextureFilterFuncSgis = tiposPrimitivas[primitivaAtual];
+        pontosExtremos.Primitiva = tiposPrimitivas[primitivaAtual];
       }
     }
 
