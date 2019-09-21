@@ -105,27 +105,21 @@ namespace questao05
                             switch (e.Key)
                             {
                                 case Key.Q:
-                                    // AlterarPosicao(Distancia * -1, ref reta);
                                     _segReta.Retornar();
                                     break;
                                 case Key.W:
-                                    // AlterarPosicao(Distancia, ref reta);
                                     _segReta.Avancar();
                                     break;
                                 case Key.Z:
-                                    // AlterarZoom(Distancia * -1, ref reta);
                                     _segReta.Diminuir();
                                     break;
                                 case Key.X:
-                                    // AlterarZoom(Distancia, ref reta);
                                     _segReta.Aumentar();
                                     break;
                                 case Key.A:
-                                    // Rotacionar(DistanciaAngulo * -1, ref reta);
                                     _segReta.DecrementarAngulo();
                                     break;
                                 case Key.S:
-                                    // Rotacionar(DistanciaAngulo, ref reta);
                                     _segReta.IncrementarAngulo();
                                     break;
                             }
@@ -175,7 +169,6 @@ namespace questao05
         //     reta.DefinirPonto(ponto1, ponto2);
         // }
 
-        // private void AlterarZoom(double adicional, ref SegReta reta)
         // {
 
         //     raio += adicional;

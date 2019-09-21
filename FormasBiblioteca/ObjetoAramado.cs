@@ -9,24 +9,24 @@ namespace FormasBiblioteca
     public class ObjetoAramado : Objeto
     {
         protected List<Ponto4D> pontosLista = new List<Ponto4D>();
-        private readonly Color _cor;
+        public Color Cor { get; set; }
 
         public ObjetoAramado(string rotulo, Color cor, float primitivaTamanho) : base(rotulo)
         {
-            _cor = cor;
+            this.Cor = cor;
             base.PrimitivaTamanho = primitivaTamanho;
         }
 
         public ObjetoAramado(string rotulo, Color cor, float primitivaTamanho, PrimitiveType primitivaTipo) : base(rotulo)
         {
-            _cor = cor;
+            this.Cor = cor;
             base.PrimitivaTipo = primitivaTipo;
             base.PrimitivaTamanho = primitivaTamanho;
         }
 
         public ObjetoAramado(string rotulo) : base(rotulo)
         {
-            _cor = Color.Black;
+            Cor = Color.Black;
         }
 
         protected override void DesenharAramado()
@@ -39,13 +39,20 @@ namespace FormasBiblioteca
             {
                 GL.LineWidth(base.PrimitivaTamanho);
             }
-            GL.Color3(_cor);
+            GL.Color3(Cor);
             GL.Begin(base.PrimitivaTipo);
             foreach (Ponto4D pto in pontosLista)
             {
                 GL.Vertex2(pto.X, pto.Y);
             }
             GL.End();
+        }
+        protected void PontosAdicionar(List<Ponto4D> pontos)
+        {
+            foreach (Ponto4D ponto in pontos)
+            {
+                pontosLista.Add(ponto);
+            }
         }
 
         protected void PontosAdicionar(Ponto4D pto)

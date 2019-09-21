@@ -1,0 +1,37 @@
+{
+	"folders": [
+		{
+			"path": "FormasBiblioteca"
+		},
+		{
+			"path": "CG_Biblioteca"
+		},
+		{
+			"path": "questao01"
+		},
+		{
+			"path": "questao02"
+		},
+		{
+			"path": "questao03"
+		},
+		{
+			"path": "questao04"
+		},
+		{
+			"path": "questao05"
+		},
+		{
+			"path": "questao06"
+		},
+		{
+			"path": "questao07"
+		},
+		{
+			"path": "assets"
+		}
+	],
+	"settings": {
+		"files.autoSave": "afterDelay"
+	}
+}
