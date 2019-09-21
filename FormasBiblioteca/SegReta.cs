@@ -7,6 +7,8 @@ namespace FormasBiblioteca
 {
     public class SegReta : ObjetoAramado
     {
+        private Ponto4D ponto, ponto2;
+        private int _raio;
         private int _angulo;
         private string metodo;
         private double distancia = 100;
@@ -25,6 +27,18 @@ namespace FormasBiblioteca
             base.PontosAdicionar(ponto);
             base.PontosAdicionar(ponto2);
             this._angulo = angulo;
+            this._raio = 100;
+        }
+
+        public SegReta(string rotulo, Ponto4D ponto, Color cor, float primitivaTamanho, int angulo = 0) : base(rotulo, cor, primitivaTamanho)
+        {
+            this.ponto = ponto;
+            this._angulo = angulo;
+            this._raio = 100;
+            matematica = new Matematica();
+            ponto2 = matematica.GerarPtosCirculo(angulo, _raio, ponto);
+            base.PontosAdicionar(ponto);
+            base.PontosAdicionar(ponto2);
         }
 
         public string GetRotulo()
@@ -36,77 +50,62 @@ namespace FormasBiblioteca
         {
             metodo = "IncrementarAngulo";
             this._angulo = this._angulo > 360 ? 0 : this._angulo + 1;
-            // if (this._angulo > 360)this._angulo = 0;
-            // else this._angulo++;
-            AtualizarPonto();
+            var pontoNovo = matematica.GerarPtosCirculo(_angulo, _raio, ponto);
+            ponto2.X = pontoNovo.X;
+            ponto2.Y = pontoNovo.Y;
+
+            Log();
         }
 
         public void DecrementarAngulo()
         {
             metodo = "DecrementarAngulo";
             this._angulo = this._angulo <= 0 ? 360 : this._angulo - 1;
-            // if (this._angulo <= 0) this._angulo = 360;
-            // else this._angulo--;
-            AtualizarPonto();
-        }
-
-        private void AtualizarPonto(int inc = 0)
-        {
-            Ponto4D ponto = base.pontosLista[0];
-            Ponto4D ponto2 = base.pontosLista[1];
-
-            double x = ponto2.X - ponto.X;
-            double y = ponto2.Y - ponto.Y;
-            distancia = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2));
-
-            Ponto4D pontoNovo = matematica.GerarPtosCirculo(_angulo, distancia + inc);
-            DefinirPonto(ponto, pontoNovo);
+            var pontoNovo = matematica.GerarPtosCirculo(_angulo, _raio, ponto);
+            ponto2.X = pontoNovo.X;
+            ponto2.Y = pontoNovo.Y;
+            Log();
         }
 
         public void Aumentar()
         {
             metodo = "Aumentar";
-            AtualizarPonto(1);
+            _raio++;
+            var pontoNovo = matematica.GerarPtosCirculo(_angulo, _raio, ponto);
+            ponto2.X = pontoNovo.X;
+            ponto2.Y = pontoNovo.Y;
+            Log();
         }
 
         public void Diminuir()
         {
             metodo = "Diminuir";
-            AtualizarPonto(-1);
+            _raio--;
+            var pontoNovo = matematica.GerarPtosCirculo(_angulo, _raio, ponto);
+            ponto2.X = pontoNovo.X;
+            ponto2.Y = pontoNovo.Y;
+            Log();
         }
 
         public void Avancar()
         {
-            Ponto4D ponto = base.pontosLista[0];
-            Ponto4D ponto2 = base.pontosLista[1];
 
-            Ponto4D pontoNovo = new Ponto4D();
-            pontoNovo.X = ponto.X + 1;
-            pontoNovo.Y = ponto.Y;
-
-            Ponto4D pontoNovo2 = new Ponto4D();
-            pontoNovo2.X = ponto2.X + 1;
-            pontoNovo2.Y = ponto2.Y;
-
+            ponto.X++;
+            ponto2.X++;
             metodo = "Avançar";
-            DefinirPonto(pontoNovo, pontoNovo2);
+            Log();
         }
 
         public void Retornar()
         {
-            metodo = "Retornar";
-            Ponto4D ponto = base.pontosLista[0];
-            ponto.X = ponto.X - 1;
-            Ponto4D ponto2 = base.pontosLista[1];
-            ponto2.X = ponto2.X - 1;
-            DefinirPonto(ponto, ponto2);
+            ponto.X--;
+            ponto2.X--;
+            metodo = "Avançar";
+            Log();
         }
 
-        public void DefinirPonto(Ponto4D ponto, Ponto4D ponto2)
+        public void Log()
         {
-            base.PontosRemoverTodos();
-            base.PontosAdicionar(ponto);
-            base.PontosAdicionar(ponto2);
             Console.Write(metodo);
             for (int i = 30; i >= metodo.Length; i--)
             {

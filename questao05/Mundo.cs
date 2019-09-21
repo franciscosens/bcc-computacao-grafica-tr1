@@ -43,7 +43,7 @@ namespace questao05
 
             var segmentoRetaA = new SegReta("A", new Ponto4D(0, 0, 0), new Ponto4D(200, 0, 0), Color.Red, 5);
             var segmentoRetaB = new SegReta("B", new Ponto4D(0, 0, 0), new Ponto4D(0, 200, 0), Color.Green, 5);
-            _segReta = new SegReta("C", new Ponto4D(0, 0, 0), matematica.GerarPtosCirculo(angulo, raio), Color.Black, 5, angulo);
+            _segReta = new SegReta("C", new Ponto4D(0, 0, 0), Color.Black, 5, angulo);
 
             objetosLista.Add(segmentoRetaA);
             objetosLista.Add(segmentoRetaB);
