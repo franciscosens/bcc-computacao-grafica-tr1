@@ -1,17 +1,16 @@
+﻿
 using System;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
-using System.Drawing;
+using System.Collections.Generic;
 using OpenTK.Input;
 using CG_Biblioteca;
-using FormasBiblioteca;
-using System.Collections.Generic;
 using Color = OpenTK.Color;
+using FormasBiblioteca;
 
-namespace questao02
+namespace questao06
 {
-
-    public class Mundo : GameWindow
+    class Mundo : GameWindow
     {
         public static Mundo instance = null;
 
@@ -26,37 +25,33 @@ namespace questao02
 
         private Camera camera = new Camera();
         protected List<Objeto> objetosLista = new List<Objeto>();
-        private bool moverPto = false;
+        //FIXME: estes objetos não devem ser atributos do Mundo
+
+        Spline spline = new Spline();
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            // GerarLinhas();
-            double raio = 100;
 
             var segmentoRetaA = new SegReta("A", new Ponto4D(0, 0, 0), new Ponto4D(200, 0, 0), Color.Red, 5);
             var segmentoRetaB = new SegReta("B", new Ponto4D(0, 0, 0), new Ponto4D(0, 200, 0), Color.Green, 5);
-            var circuloA = new Circulo("A", raio, Color.Yellow, 0, 0, 5);
 
             objetosLista.Add(segmentoRetaA);
             objetosLista.Add(segmentoRetaB);
-            objetosLista.Add(circuloA);
             GL.ClearColor(Color.Gray);
         }
-
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             base.OnUpdateFrame(e);
+
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();
-            //GL.Ortho(camera.xmin, camera.xmax, camera.ymin, camera.ymax, camera.zmin, camera.zmax);
-            GL.Ortho(-300, 300, -300, 300, -1, 1);
-
+            GL.Ortho(-400, 400, -400, 400, -1, 1);
         }
-
         protected override void OnRenderFrame(FrameEventArgs e)
         {
             base.OnRenderFrame(e);
+
             GL.Clear(ClearBufferMask.ColorBufferBit);
             GL.MatrixMode(MatrixMode.Modelview);
             GL.LoadIdentity();
@@ -66,46 +61,35 @@ namespace questao02
                 objetosLista[i].Desenhar();
             }
 
+            spline.Desenhar();
+
             this.SwapBuffers();
         }
-
-        private void GerarLinhas()
-        {
-            GL.LineWidth(5);
-            GL.Begin(PrimitiveType.Lines);
-            GL.Color3(Color.Red);
-            GL.Vertex2(0, 0); GL.Vertex2(200, 0);
-            GL.Color3(Color.Green);
-            GL.Vertex2(0, 0); GL.Vertex2(0, 200);
-            GL.End();
-        }
-
 
         protected override void OnKeyDown(OpenTK.Input.KeyboardKeyEventArgs e)
         {
             if (e.Key == Key.Escape)
                 Exit();
-            else
-            if (e.Key == Key.E)
-            {
-                for (var i = 0; i < objetosLista.Count; i++)
-                {
-                    objetosLista[i].PontosExibirObjeto();
-                }
-            }
-            else
-            if (e.Key == Key.M)
-            {
-                moverPto = !moverPto;
-            }
-        }
+            if ((e.Key == Key.Number1) || (e.Key == Key.Keypad1))
+                this.spline.SelecionarPonto(0);
+            if ((e.Key == Key.Number2) || (e.Key == Key.Keypad2))
+                this.spline.SelecionarPonto(1);
+            if ((e.Key == Key.Number3) || (e.Key == Key.Keypad3))
+                this.spline.SelecionarPonto(2);
+            if ((e.Key == Key.Number4) || (e.Key == Key.Keypad4))
+                this.spline.SelecionarPonto(3);
 
-        protected override void OnMouseMove(MouseMoveEventArgs e)
-        {
-            if (moverPto)
-            {
-                //retanguloB.MoverPtoSupDir(new Ponto4D(e.Position.X, 600 - e.Position.Y, 0));
-            }
+            if ((e.Key == Key.C) || (e.Key == Key.B) || (e.Key == Key.E) || (e.Key == Key.D))
+                this.spline.MoverPontoDeControle(e.Key);
+
+            if ((e.Key == Key.Plus) || (e.Key == Key.KeypadPlus))
+                this.spline.AumentarQtdePontos();
+            if ((e.Key == Key.Minus) || (e.Key == Key.KeypadMinus))
+                this.spline.DiminuirQtdePontos();
+
+            if (e.Key == Key.R)
+                this.spline.ReiniciarPontosDeControle();
         }
     }
+
 }
