@@ -81,14 +81,18 @@ namespace FormasBiblioteca
         {
 
             double angulo = 0;
-            foreach (Ponto4D ponto in pontos)
+            var localizacao = TratarColisao(distancia, pontoCirculoMaior, raioCirculoMaior);
+            if (localizacao != "Fora Completo")
             {
-                var pontoNovo = matematica.GerarPtosCirculo(angulo, _raio, distancia);
-                ponto.X = pontoNovo.X;
-                ponto.Y = pontoNovo.Y;
-                angulo += _angulo;
+                foreach (Ponto4D ponto in pontos)
+                {
+                    var pontoNovo = matematica.GerarPtosCirculo(angulo, _raio, distancia);
+                    ponto.X = pontoNovo.X;
+                    ponto.Y = pontoNovo.Y;
+                    angulo += _angulo;
+                }
             }
-            return TratarColisao(distancia, pontoCirculoMaior, raioCirculoMaior);
+            return localizacao;
         }
 
         private string TratarColisao(Ponto4D pontoQuadrado, Ponto4D pontoCirculoMaior, double raioCirculoMaior)

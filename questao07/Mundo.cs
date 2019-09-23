@@ -42,8 +42,8 @@ namespace questao07
             base.OnLoad(e);
             double raio = 100;
 
-            var segmentoRetaA = new SegReta("A", new Ponto4D(0, 0, 0), new Ponto4D(200, 0, 0), Color.Red, 5);
-            var segmentoRetaB = new SegReta("B", new Ponto4D(0, 0, 0), new Ponto4D(0, 200, 0), Color.Green, 5);
+            var segmentoRetaA = new SegReta("A", new Ponto4D(0, 20, 0), new Ponto4D(200, 20, 0), Color.Red, 3);
+            var segmentoRetaB = new SegReta("B", new Ponto4D(20, 0, 0), new Ponto4D(20, 200, 0), Color.Green, 3);
             var angulosDesejados = new List<double>() { 45, 135, 225, 315 };
             circuloMaior = new Circulo("C", raioCirculoMaior, Color.Black, angulosDesejados, 360, 200, 200, 1, 1);
             circuloMenor = new Circulo("C", 50, Color.Black, 360, 200, 200, 1, 1);
