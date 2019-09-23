@@ -9,11 +9,11 @@ namespace FormasBiblioteca
         protected string rotulo;
         private PrimitiveType primitivaTipo = PrimitiveType.LineLoop;
         private float primitivaTamanho = 2;
-        private BBox bBox = new BBox();
+        protected BBox bBox = new BBox();
         private List<Objeto> objetosLista = new List<Objeto>();
 
 
-        public Objeto(string rotulo)
+        public Objeto(string rotulo)  
         {
             this.rotulo = rotulo;
         }

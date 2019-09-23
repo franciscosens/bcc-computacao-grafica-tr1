@@ -27,7 +27,7 @@ namespace FormasBiblioteca
         /// <param name="cor">Cor dos pontos do círculo</param>
         /// <param name="deslocamentoX">Caso necessário deslocar no eixo X utilziar um inteiro</param>
         /// <param name="deslocamentoY">Caso necessário deslocar no eixo Y utilziar um inteiro</param>
-        /// <param name="primitivaTamanho">Tamanho dos pontos</param>
+        /// <param name="primitivaTamanho">Tamanho dos pontos</param>        
         public Circulo(string rotulo, double raio, Color cor, int quantidadePontos = 72, int deslocamentoX = 0, int deslocamentoY = 0, int primitivaTamanho = 4, int angulo = 5)
         : base(rotulo, cor, primitivaTamanho, PrimitiveType.Points)
         {
@@ -51,6 +51,11 @@ namespace FormasBiblioteca
             GerarCirculo();
         }
 
+        public void DefinirBoundBox(Ponto4D pontoMin, Ponto4D pontoMax)
+        {
+            base.bBox.Atribuir(pontoMin, pontoMax);
+        }
+
         private void GerarCirculo()
         {
             double angulo = 0;
@@ -72,7 +77,7 @@ namespace FormasBiblioteca
             GL.End();
         }
 
-        public void Mover(Ponto4D distancia)
+        public string Mover(Ponto4D distancia, Ponto4D pontoCirculoMaior, double raioCirculoMaior)
         {
 
             double angulo = 0;
@@ -82,6 +87,26 @@ namespace FormasBiblioteca
                 ponto.X = pontoNovo.X;
                 ponto.Y = pontoNovo.Y;
                 angulo += _angulo;
+            }
+            return TratarColisao(distancia, pontoCirculoMaior, raioCirculoMaior);
+        }
+
+        private string TratarColisao(Ponto4D pontoQuadrado, Ponto4D pontoCirculoMaior, double raioCirculoMaior)
+        {
+            var boundBox = base.bBox;
+            if (pontoQuadrado.X > boundBox.obterMenorX || pontoQuadrado.X < boundBox.obterMaiorX || pontoQuadrado.Y > boundBox.obterMenorY || pontoQuadrado.Y < boundBox.obterMaiorY)
+            {
+                double x1 = pontoCirculoMaior.X, x2 = pontoQuadrado.X, y1 = pontoCirculoMaior.Y, y2 = pontoQuadrado.Y;
+                if (Math.Sqrt(Math.Pow(((x2 - x1)), 2) + Math.Pow(((y2 - y1)), 2)) > raioCirculoMaior)
+                {
+                    return "Fora Completo";
+                }
+                return "Fora";
+            }
+            else
+            {
+
+                return "Dentro";
             }
         }
     }
