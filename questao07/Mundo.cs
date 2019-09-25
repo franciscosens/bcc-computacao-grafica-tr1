@@ -47,6 +47,8 @@ namespace questao07
             circuloMaior = new Circulo("C", raioCirculoMaior, Color.Black, angulosDesejados, 360, 200, 200, 1, 1);
             circuloMenor = new Circulo("C", 70, Color.Black, 360, 200, 200, 1, 1);
 
+
+            objetosLista.Add(circuloMenor.segReta);
             Ponto4D ponto1 = circuloMaior.pontosDosAngulos[0];
             Ponto4D ponto2 = circuloMaior.pontosDosAngulos[1];
             Ponto4D ponto3 = circuloMaior.pontosDosAngulos[2];
@@ -110,7 +112,12 @@ namespace questao07
             }
             else if (e.Key == Key.M)
             {
+
                 moverPto = !moverPto;
+                if (moverPto == false)
+                {
+                    circuloMenor.Restaurar();
+                }
             }
         }
 

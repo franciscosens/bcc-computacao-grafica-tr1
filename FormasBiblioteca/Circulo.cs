@@ -16,8 +16,14 @@ namespace FormasBiblioteca
 
         public readonly int _quantidadePontos;
         public readonly int _angulo;
+
+        public SegReta segReta;
+        public Ponto4D pontoQuadrado1;
+        public Ponto4D pontoQuadrado2;
+
         public List<Ponto4D> pontosDosAngulos = new List<Ponto4D>();
         private List<Ponto4D> pontos = new List<Ponto4D>();
+
         private readonly List<double> _angulosDesejados;
 
         /// <summary>
@@ -34,8 +40,16 @@ namespace FormasBiblioteca
             _raio = raio;
             _deslocamentoX = deslocamentoX;
             _deslocamentoY = deslocamentoY;
-            _quantidadePontos = quantidadePontos;
+            _quantidadePontos = quantidadePontos; 
             _angulo = angulo;
+            pontoQuadrado1 = new Ponto4D(deslocamentoX, deslocamentoY - 3);
+            pontoQuadrado2 = new Ponto4D(deslocamentoX, deslocamentoY + 3);
+            segReta = new SegReta("Q", pontoQuadrado1, pontoQuadrado2, Color.Blue, 3);
+
+            pontoQuadrado1 = new Ponto4D(deslocamentoX, deslocamentoY - 3);
+            pontoQuadrado2 = new Ponto4D(deslocamentoX, deslocamentoY + 3);
+            segReta = new SegReta("Q", pontoQuadrado1, pontoQuadrado2, Color.Blue, 3);
+
             GerarCirculo();
         }
 
@@ -48,6 +62,7 @@ namespace FormasBiblioteca
             _quantidadePontos = quantidadePontos;
             _angulo = angulo;
             _angulosDesejados = angulos;
+
             GerarCirculo();
         }
 
@@ -77,13 +92,36 @@ namespace FormasBiblioteca
             GL.End();
         }
 
+        public void Restaurar()
+        {
+            Ponto4D deslocamento = new Ponto4D(_deslocamentoX, _deslocamentoY, 0);
+            double angulo = 0;
+            pontoQuadrado1.X = _deslocamentoX;
+            pontoQuadrado1.Y = _deslocamentoY - 3;
+
+            pontoQuadrado2.X = _deslocamentoX;
+            pontoQuadrado2.Y = _deslocamentoY + 3;
+            foreach (Ponto4D ponto in pontos)
+            {
+                var pontoNovo = matematica.GerarPtosCirculo(angulo, _raio, deslocamento);
+                ponto.X = pontoNovo.X;
+                ponto.Y = pontoNovo.Y;
+                angulo += _angulo;
+            }
+        }
+
         public string Mover(Ponto4D distancia, Ponto4D pontoCirculoMaior, double raioCirculoMaior)
         {
-
             double angulo = 0;
+
             var localizacao = TratarColisao(distancia, pontoCirculoMaior, raioCirculoMaior);
             if (localizacao != "Fora Completo")
             {
+                pontoQuadrado1.X = distancia.X;
+                pontoQuadrado1.Y = distancia.Y - 3;
+
+                pontoQuadrado2.X = distancia.X;
+                pontoQuadrado2.Y = distancia.Y + 3;
                 foreach (Ponto4D ponto in pontos)
                 {
                     var pontoNovo = matematica.GerarPtosCirculo(angulo, _raio, distancia);
@@ -109,7 +147,6 @@ namespace FormasBiblioteca
             }
             else
             {
-
                 return "Dentro";
             }
         }
