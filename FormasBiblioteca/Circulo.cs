@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using CG_Biblioteca;
 using OpenTK.Graphics.OpenGL;
+using Color = OpenTK.Color;
 
 namespace FormasBiblioteca
 {
