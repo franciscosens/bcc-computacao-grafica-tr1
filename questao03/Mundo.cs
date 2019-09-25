@@ -6,7 +6,6 @@ using OpenTK.Input;
 using CG_Biblioteca;
 using FormasBiblioteca;
 using System.Collections.Generic;
-using Color = OpenTK.Color;
 
 namespace questao03
 {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using CG_Biblioteca;
 using OpenTK.Graphics.OpenGL;
 using System.Drawing;
-using Color = OpenTK.Color;
 
 namespace FormasBiblioteca
 {
