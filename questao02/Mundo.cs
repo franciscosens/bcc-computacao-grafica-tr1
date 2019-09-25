@@ -24,7 +24,7 @@ namespace questao02
             return instance;
         }
 
-        private Camera camera = new Camera();
+        private Camera camera = new Camera(-300, 300, -300, 300, -1, 1);
         protected List<Objeto> objetosLista = new List<Objeto>();
         private bool moverPto = false;
 
@@ -36,7 +36,7 @@ namespace questao02
 
             var segmentoRetaA = new SegReta("A", new Ponto4D(0, 0, 0), new Ponto4D(200, 0, 0), Color.Red, 5);
             var segmentoRetaB = new SegReta("B", new Ponto4D(0, 0, 0), new Ponto4D(0, 200, 0), Color.Green, 5);
-            var circuloA = new Circulo("A", raio, Color.Yellow, 0, 0, 5);
+            var circuloA = new Circulo("A", raio, Color.Yellow, 72, 0, 0, 5);
 
             objetosLista.Add(segmentoRetaA);
             objetosLista.Add(segmentoRetaB);
@@ -49,8 +49,8 @@ namespace questao02
             base.OnUpdateFrame(e);
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();
-            //GL.Ortho(camera.xmin, camera.xmax, camera.ymin, camera.ymax, camera.zmin, camera.zmax);
-            GL.Ortho(-300, 300, -300, 300, -1, 1);
+            GL.Ortho(camera.xmin, camera.xmax, camera.ymin, camera.ymax, camera.zmin, camera.zmax);
+            // GL.Ortho(-300, 300, -300, 300, -1, 1);
 
         }
 
@@ -83,20 +83,29 @@ namespace questao02
 
         protected override void OnKeyDown(OpenTK.Input.KeyboardKeyEventArgs e)
         {
-            if (e.Key == Key.Escape)
-                Exit();
-            else
-            if (e.Key == Key.E)
+            switch (e.Key)
             {
-                for (var i = 0; i < objetosLista.Count; i++)
-                {
-                    objetosLista[i].PontosExibirObjeto();
-                }
-            }
-            else
-            if (e.Key == Key.M)
-            {
-                moverPto = !moverPto;
+                case Key.Escape:
+                    Exit();
+                    break;
+                case Key.E: // Pan Esquerda
+                    camera.PanEsquerda();
+                    break;
+                case Key.D: // Pan Direita
+                    camera.PanDireita();
+                    break;
+                case Key.C: // Pan Cima
+                    camera.PanCima();
+                    break;
+                case Key.B: // Pan Baixo
+                    camera.PanBaixo();
+                    break;
+                case Key.I: // Zoom IN
+                    camera.ZoomIn();
+                    break;
+                case Key.O: // Zoom Out
+                    camera.ZoomOut();
+                    break;
             }
         }
 

@@ -36,7 +36,7 @@ namespace questao01
 
             var segmentoRetaA = new SegReta("A", new Ponto4D(0, 0, 0), new Ponto4D(200, 0, 0), Color.Red, 5);
             var segmentoRetaB = new SegReta("B", new Ponto4D(0, 0, 0), new Ponto4D(0, 200, 0), Color.Green, 5);
-            var circuloA = new Circulo("A", raio, Color.Yellow, 0, 0, 5);
+            var circuloA = new Circulo("A", raio, Color.Yellow, 72, 0, 0, 5);
 
             objetosLista.Add(segmentoRetaA);
             objetosLista.Add(segmentoRetaB);
@@ -79,8 +79,6 @@ namespace questao01
             GL.Vertex2(0, 0); GL.Vertex2(0, 200);
             GL.End();
         }
-
-
         protected override void OnKeyDown(OpenTK.Input.KeyboardKeyEventArgs e)
         {
             if (e.Key == Key.Escape)
