@@ -39,9 +39,9 @@ namespace questao03
             var segmentoRetaC = new SegReta("C", new Ponto4D(-100, -100, 0), new Ponto4D(0, 100, 0), Color.Aqua, 5);
             var segmentoRetaD = new SegReta("D", new Ponto4D(0, 100, 0), new Ponto4D(100, -100, 0), Color.Aqua, 5);
             var segmentoRetaE = new SegReta("E", new Ponto4D(-100, -100, 0), new Ponto4D(100, -100, 0), Color.Aqua, 5);
-            var circuloA = new Circulo("A", raio, Color.Black, 0, 100, 5);
-            var circuloB = new Circulo("B", raio, Color.Black, 100, -100, 5);
-            var circuloC = new Circulo("C", raio, Color.Black, -100, -100, 5);
+            var circuloA = new Circulo("A", raio, Color.Black, 72, 0, 100, 5);
+            var circuloB = new Circulo("B", raio, Color.Black, 72, 100, -100, 5);
+            var circuloC = new Circulo("C", raio, Color.Black, 72, -100, -100, 5);
 
             objetosLista.Add(segmentoRetaA);
             objetosLista.Add(segmentoRetaB);
